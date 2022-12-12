@@ -2,7 +2,9 @@
 
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
-(setq doom-theme 'doom-one) ;;also tried monokai, doom-vibrant etc
+
+;; MY OWN CONFIG
+(setq doom-theme 'doom-monokai-machine) ;;also tried monokai, doom-vibrant etc
 (setq display-line-numbers-type 'visual)
 (setq visible-cursor nil)
 (setq org-cycle-separator-lines -1)
@@ -14,9 +16,26 @@
 (use-package! org
   :config (setq org-startup-folded 'content))
 
+;; Face needs to be customized because default colors are unideal
+(custom-set-faces!
+    '(dired-marked :foreground "#c678dd" :background nil :inverse-video nil)
+    '(hl-line :background nil)
+    '(org-hide :foreground "black")
+    )
+
+(after! magit ( custom-set-faces!
+    '(magit-diff-removed :foreground "#be7373" :background "black")
+    '(magit-diff-removed-highlight :foreground "#ee9090" :background "black")))
+
+(after! org ( custom-set-faces! '(org-todo :foreground "#7fff50" :background "black")))
+
 (setq default-directory "/mnt/c/Users/brian/OneDrive/testorg")
+(setq scroll-margin 4)
 
+;;(after! evil-org
+  ;;(remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
+;;ENG OF MY OWN CONFIG
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
