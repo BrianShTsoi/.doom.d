@@ -4,7 +4,7 @@
 ;; sync' after modifying this file!
 
 ;; MY OWN CONFIG
-(setq doom-theme 'doom-monokai-machine) ;;also tried monokai, doom-vibrant etc
+(setq doom-theme 'doom-one) ;;also tried monokai, doom-vibrant, wombat etc
 (setq display-line-numbers-type 'visual)
 (setq visible-cursor nil)
 (setq org-cycle-separator-lines -1)
@@ -17,23 +17,50 @@
   :config (setq org-startup-folded 'content))
 
 ;; Face needs to be customized because default colors are unideal
-(custom-set-faces!
-    '(dired-marked :foreground "#c678dd" :background nil :inverse-video nil)
-    '(hl-line :background nil)
-    '(org-hide :foreground "black")
-    )
+;; For monokai machine
+;;(custom-set-faces!
+    ;;'(dired-marked :foreground "#c678dd" :background nil :inverse-video nil)
+    ;;'(hl-line :background nil)
+    ;;'(org-hide :foreground "black")
+    ;;)
+;;(after! magit ( custom-set-faces!
+    ;;'(magit-diff-removed :foreground "#be7373" :background "black")
+    ;;'(magit-diff-removed-highlight :foreground "#ee9090" :background "black")))
+;;(after! org ( custom-set-faces! '(org-todo :foreground "#7fff50" :background "black")))
 
-(after! magit ( custom-set-faces!
-    '(magit-diff-removed :foreground "#be7373" :background "black")
-    '(magit-diff-removed-highlight :foreground "#ee9090" :background "black")))
+;; For Doom one
+(custom-set-faces! 
+    '(orderless-match-face-0 :foreground "#51afef" :background nil)
+    '(orderless-match-face-1 :foreground "#c678dd" :background nil)
+    '(orderless-match-face-2 :foreground "#99bb66" :background nil)
+    '(orderless-match-face-3 :foreground "#ecbe7b" :background nil))
 
-(after! org ( custom-set-faces! '(org-todo :foreground "#7fff50" :background "black")))
+;; Default dired to hide details
+(use-package dired
+  :hook (dired-mode . dired-hide-details-mode))
 
-(setq default-directory "/mnt/c/Users/brian/OneDrive/testorg")
+;; h and l dired behaviors reusing buffer
+(defun dired-up-alternate-file ()
+  "In Dired, go up one directory, reusing the current buffer"
+  (interactive)
+  (find-alternate-file (file-name-directory (directory-file-name list-buffers-directory)))
+)
+(map! :after dired
+      :map dired-mode-map
+      :nv "-"
+      'dired-up-alternate-file)
+(map! :after dired
+      :map dired-mode-map
+      :nv "RET"
+      'dired-find-alternate-file) 
+
+(setq default-directory "/mnt/c/Users/brian/OneDrive/org")
 (setq scroll-margin 4)
 
 ;;(after! evil-org
   ;;(remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
+
+(setq org-directory "/mnt/c/Users/brian/OneDrive/org")
 
 ;;ENG OF MY OWN CONFIG
 
@@ -73,7 +100,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+;;(setq org-directory "~/org/")
 
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
