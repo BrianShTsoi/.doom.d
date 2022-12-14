@@ -33,7 +33,16 @@
     '(orderless-match-face-0 :foreground "#51afef" :background nil)
     '(orderless-match-face-1 :foreground "#c678dd" :background nil)
     '(orderless-match-face-2 :foreground "#99bb66" :background nil)
-    '(orderless-match-face-3 :foreground "#ecbe7b" :background nil))
+    '(orderless-match-face-3 :foreground "#ecbe7b" :background nil)
+    '(diff-refine-added :foreground "#90ee90" :background "#black" :inverse-video nil)
+    '(diff-refine-changed :foreground "#a9a1e1" :background "black" :inverse-video nil)
+    '(diff-refine-removed :foreground "#ee9090" :background "black" :inverse-video nil))
+(after! magit (custom-set-faces!
+    '(magit-diff-hunk-heading-highlight :foreground "#400040")
+    '(magit-diff-hunk-heading-selection :foreground "#805000" :background "#a9a1e1")
+    '(magit-diff-revision-summary-highlight :foreground "#FF00FF")
+    '(magit-diff-added :foreground "#73be73" :background "black")
+    '(magit-diff-added-highlight :foreground "#90ee90" :background "black")))
 
 ;; Default dired to hide details
 (use-package dired
@@ -61,6 +70,8 @@
   ;;(remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
 (setq org-directory "/mnt/c/Users/brian/OneDrive/org")
+
+(setq org-blank-before-new-entry '((heading . never) (plain-list-item . never)))
 
 ;;ENG OF MY OWN CONFIG
 
