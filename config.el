@@ -5,6 +5,7 @@
 
 ;; MY OWN CONFIG
 (setq doom-theme 'doom-one) ;;also tried monokai, doom-vibrant, wombat etc
+(setq doom-font (font-spec :size 24))
 (setq display-line-numbers-type 'visual)
 (setq visible-cursor nil)
 (setq org-cycle-separator-lines -1)
@@ -16,33 +17,64 @@
 (use-package! org
   :config (setq org-startup-folded 'content))
 
-;; Face needs to be customized because default colors are unideal
-;; For monokai machine
-;;(custom-set-faces!
-    ;;'(dired-marked :foreground "#c678dd" :background nil :inverse-video nil)
-    ;;'(hl-line :background nil)
-    ;;'(org-hide :foreground "black")
-    ;;)
-;;(after! magit ( custom-set-faces!
-    ;;'(magit-diff-removed :foreground "#be7373" :background "black")
-    ;;'(magit-diff-removed-highlight :foreground "#ee9090" :background "black")))
-;;(after! org ( custom-set-faces! '(org-todo :foreground "#7fff50" :background "black")))
+; Face needs to be customized because default colors are unideal
+; For monokai machine
+;(custom-set-faces!
+    ;'(dired-marked :foreground "#c678dd" :background nil :inverse-video nil)
+    ;'(hl-line :background nil)
+    ;'(org-hide :foreground "black")
+    ;)
+;(after! magit ( custom-set-faces!
+    ;'(magit-diff-removed :foreground "#be7373" :background "black")
+    ;'(magit-diff-removed-highlight :foreground "#ee9090" :background "black")))
+;(after! org ( custom-set-faces! '(org-todo :foreground "#7fff50" :background "black")))
 
-;; For Doom one
-(custom-set-faces! 
-    '(orderless-match-face-0 :foreground "#51afef" :background nil)
-    '(orderless-match-face-1 :foreground "#c678dd" :background nil)
-    '(orderless-match-face-2 :foreground "#99bb66" :background nil)
-    '(orderless-match-face-3 :foreground "#ecbe7b" :background nil)
-    '(diff-refine-added :foreground "#90ee90" :background "#black" :inverse-video nil)
-    '(diff-refine-changed :foreground "#a9a1e1" :background "black" :inverse-video nil)
-    '(diff-refine-removed :foreground "#ee9090" :background "black" :inverse-video nil))
-(after! magit (custom-set-faces!
-    '(magit-diff-hunk-heading-highlight :foreground "#400040")
-    '(magit-diff-hunk-heading-selection :foreground "#805000" :background "#a9a1e1")
-    '(magit-diff-revision-summary-highlight :foreground "#FF00FF")
-    '(magit-diff-added :foreground "#73be73" :background "black")
-    '(magit-diff-added-highlight :foreground "#90ee90" :background "black")))
+; For Doom one
+;(custom-set-faces!
+    ;'(orderless-match-face-0 :foreground "#51afef" :background nil)
+    ;'(orderless-match-face-1 :foreground "#c678dd" :background nil)
+    ;'(orderless-match-face-2 :foreground "#99bb66" :background nil)
+    ;'(orderless-match-face-3 :foreground "#ecbe7b" :background nil)
+    ;'(diff-refine-added :foreground "#90ee90" :background "#black" :inverse-video nil)
+    ;'(diff-refine-changed :foreground "#a9a1e1" :background "black" :inverse-video nil)
+    ;'(diff-refine-removed :foreground "#ee9090" :background "black" :inverse-video nil))
+;(after! magit (custom-set-faces!
+    ;'(magit-diff-hunk-heading-highlight :foreground "#400040")
+    ;'(magit-diff-hunk-heading-selection :foreground "#805000" :background "#a9a1e1")
+    ;'(magit-diff-revision-summary-highlight :foreground "#FF00FF")
+    ;'(magit-diff-added :foreground "#73be73" :background "black")
+    ;'(magit-diff-added-highlight :foreground "#90ee90" :background "black")))
+
+;; For wombat
+;(after! org (custom-set-faces!
+    ;'(org-level-1 :foreground "#FFFFE0" :background nil)
+    ;'(org-level-2 :foreground "#ABF7B1" :background nil)
+    ;'(org-level-1 :foreground "light yellow" :background nil)
+    ;'(org-level-2 :foreground "lime" :background nil)
+    ;'(org-level-3 :foreground "pale turquoise" :background nil)
+    ;'(org-document-title :foreground "orange" :background nil)))
+    ;; '(diredfl-dir-heading :foreground "green" :background nil)
+    ;; ))
+
+;; Stop heading from bold
+(after! org (custom-set-faces!
+              '(org-level-1 :weight regular :inherit outline-7)
+              '(org-level-2 :weight regular :inherit outline-6)
+              '(org-level-3 :weight regular :inherit outline-5)
+              '(org-level-4 :weight regular :inherit outline-4)
+              '(org-level-5 :weight regular :inherit outline-3)
+              '(org-level-6 :weight regular :inherit outline-2)
+              '(org-level-7 :weight regular :inherit outline-1)
+              '(org-level-8 :weight regular :inherit outline-8)
+              ;'(org-level-1 :weight regular :inherit outline-1)
+              ;'(org-level-2 :weight regular :inherit outline-2)
+              ;'(org-level-3 :weight regular :inherit outline-3)
+              ;'(org-level-4 :weight regular :inherit outline-4)
+              ;'(org-level-5 :weight regular :inherit outline-5)
+              ;'(org-level-6 :weight regular :inherit outline-6)
+              ;'(org-level-7 :weight regular :inherit outline-7)
+              ;'(org-level-8 :weight regular :inherit outline-8)
+              ))
 
 ;; Default dired to hide details
 (use-package dired
@@ -71,7 +103,8 @@
 
 (setq org-directory "/mnt/c/Users/brian/OneDrive/org")
 
-(setq org-blank-before-new-entry '((heading . never) (plain-list-item . never)))
+(setq org-blank-before-new-entry nil)
+(setq company-global-modes '(not org-mode))
 
 ;;ENG OF MY OWN CONFIG
 
