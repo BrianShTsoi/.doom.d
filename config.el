@@ -13,9 +13,9 @@
 ;; disable evil snipe
 (remove-hook 'doom-first-input-hook #'evil-snipe-mode)
 
-;; org default view overview
+;;org default view overview
 (use-package! org
-  :config (setq org-startup-folded 'content))
+  :config (setq org-startup-folded t))
 
 ; Face needs to be customized because default colors are unideal
 ; For monokai machine
@@ -55,12 +55,16 @@
     ;'(org-document-title :foreground "orange" :background nil)))
     ;; '(diredfl-dir-heading :foreground "green" :background nil)
     ;; ))
+    ;;
 
 ;; Stop heading from bold
+;; For GUI
+(after! org ( custom-set-faces! '(org-todo :background nil)))
+
 (after! org (custom-set-faces!
-              '(org-level-1 :weight regular :inherit outline-7)
+              '(org-level-1 :weight regular :inherit outline-7 :foreground "#efc5fc")
               '(org-level-2 :weight regular :inherit outline-6)
-              '(org-level-3 :weight regular :inherit outline-5)
+              '(org-level-3 :weight regular :inherit outline-5 :foreground "#edadff")
               '(org-level-4 :weight regular :inherit outline-4)
               '(org-level-5 :weight regular :inherit outline-3)
               '(org-level-6 :weight regular :inherit outline-2)
@@ -74,6 +78,7 @@
               ;'(org-level-6 :weight regular :inherit outline-6)
               ;'(org-level-7 :weight regular :inherit outline-7)
               ;'(org-level-8 :weight regular :inherit outline-8)
+              '(org-table :foreground nil :weight regular :inherit outline-6)
               ))
 
 ;; Default dired to hide details
@@ -95,18 +100,42 @@
       :nv "RET"
       'dired-find-alternate-file) 
 
-(setq default-directory "/mnt/c/Users/brian/OneDrive/org")
-(setq scroll-margin 4)
+(setq default-directory "/mnt/c/Users/brian/OneDrive/org_ongoing")
+(setq scroll-margin 3)
 
 ;;(after! evil-org
   ;;(remove-hook 'org-tab-first-hook #'+org-cycle-only-current-subtree-h))
 
-(setq org-directory "/mnt/c/Users/brian/OneDrive/org")
+(setq org-directory "/mnt/c/Users/brian/OneDrive/org_ongoing")
 
 (setq org-blank-before-new-entry nil)
 (setq company-global-modes '(not org-mode))
 
-;;ENG OF MY OWN CONFIG
+(after! org (setq org-fold-core-style 'overlays) )
+(after! persp-mode
+  (setq persp-emacsclient-init-frame-behaviour-override "main"))
+;;(map! :after evil-org :map evil-org-mode-map
+;;      :nv "z o" #'evil-open-fold)
+
+;; enable auto save
+;; (after! evil-org
+;;   (auto-save-visited-mode))
+;;   another auto save method
+;; (add-hook 'evil-insert-state-exit-hook
+;;           (lambda ()
+;;             (call-interactively #'save-buffer)))
+
+;; default treemacs width
+(setq treemacs-width 36)
+
+(require' latex-preview-pane)
+(latex-preview-pane-enable)
+
+;;(add-hook 'window-setup-hook #'toggle-frame-fullscreen)
+;;(setq confirm-kill-emacs nil)
+(add-to-list 'default-frame-alist '(fullscreen . fullboth))
+
+;;END OF MY OWN CONFIG
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
